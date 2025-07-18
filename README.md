@@ -1,12 +1,105 @@
-# React + Vite
+# react-dropdown-oc
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📖 Présentation (Français)
 
-Currently, two official plugins are available:
+**react-dropdown-oc** est une bibliothèque React légère et personnalisable pour créer des menus déroulants élégants et accessibles. Elle facilite l'intégration de listes déroulantes dans vos applications React avec une API simple et flexible.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🚀 Fonctionnalités
 
-## Expanding the ESLint configuration
+- Facile à utiliser et à intégrer
+- Personnalisation complète du style
+- Accessibilité (support clavier et ARIA)
+- Support des listes dynamiques
+- Gestion des événements (onChange, onOpen, onClose)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🛠️ Installation
+
+```bash
+npm install react-dropdown-oc
+```
+
+ou
+
+```bash
+yarn add react-dropdown-oc
+```
+
+### ⚡ Utilisation de base
+
+```jsx
+import Dropdown from "react-dropdown-oc";
+
+const options = [
+  { value: "apple", label: "Pomme" },
+  { value: "banana", label: "Banane" },
+  { value: "orange", label: "Orange" },
+];
+
+function App() {
+  return (
+    <Dropdown
+      options={options}
+      onChange={(selected) => console.log(selected)}
+      placeholder="Sélectionnez un fruit"
+    />
+  );
+}
+```
+
+### 🎨 Personnalisation
+
+Vous pouvez personnaliser le style via des props ou en surchargeant les classes CSS.
+
+---
+
+# react-dropdown-oc
+
+## 📖 Overview (English)
+
+**react-dropdown-oc** is a lightweight and customizable React library for creating stylish and accessible dropdown menus. It makes it easy to integrate dropdown lists into your React applications with a simple and flexible API.
+
+### 🚀 Features
+
+- Easy to use and integrate
+- Fully customizable styling
+- Accessibility (keyboard and ARIA support)
+- Dynamic list support
+- Event handling (onChange, onOpen, onClose)
+
+### 🛠️ Installation
+
+```bash
+npm install react-dropdown-oc
+```
+
+or
+
+```bash
+yarn add react-dropdown-oc
+```
+
+### ⚡ Basic Usage
+
+```jsx
+import Dropdown from "react-dropdown-oc";
+
+const options = [
+  { value: "apple", label: "Apple" },
+  { value: "banana", label: "Banana" },
+  { value: "orange", label: "Orange" },
+];
+
+function App() {
+  return (
+    <Dropdown
+      options={options}
+      onChange={(selected) => console.log(selected)}
+      placeholder="Select a fruit"
+    />
+  );
+}
+```
+
+### 🎨 Customization
+
+You can customize the style via props or by overriding CSS classes.
