@@ -1,9 +1,14 @@
+import "../styles/dropdown.css";
+
 export default function Dropdown({
   label,
   name,
   value,
   options = [],
   onChange,
+  className = "",
+  disabled = false,
+  required = false,
 }) {
   const id = name ?? label.toLowerCase().replace(/\s+/g, "-");
 
@@ -19,12 +24,15 @@ export default function Dropdown({
         </label>
       )}
       <select
-        className="dropdown"
+        className={`dropdown ${className}`}
         value={value ?? ""}
         onChange={handleChange}
         name={name}
         id={id}
+        disabled={disabled}
+        required={required}
       >
+        {!value && <option value="" disabled hidden></option>}
         {options.map((option, index) => {
           const optionValue = option.value ?? option.abbreviation ?? option;
           const label = option.label ?? option.name ?? option;
