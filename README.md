@@ -48,6 +48,7 @@ function App() {
 
 ### 🎨 Personnalisation
 
+import "react-dropdown-oc-ap/styles/dropdown.css" pour le style de base.
 Vous pouvez personnaliser le style via des props ou en surchargeant les classes CSS.
 
 ---
@@ -102,4 +103,5 @@ function App() {
 
 ### 🎨 Customization
 
+import "react-dropdown-oc-ap/styles/dropdown.css" for base style.
 You can customize the style via props or by overriding CSS classes.
