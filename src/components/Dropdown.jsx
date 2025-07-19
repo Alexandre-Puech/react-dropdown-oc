@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import "../../styles/dropdown.css";
 
 export default function Dropdown({
   label,
