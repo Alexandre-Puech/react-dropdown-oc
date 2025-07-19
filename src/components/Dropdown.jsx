@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import "../styles/dropdown.css";
 
 export default function Dropdown({
@@ -10,39 +11,68 @@ export default function Dropdown({
   disabled = false,
   required = false,
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
   const id = name ?? label.toLowerCase().replace(/\s+/g, "-");
 
-  const handleChange = (e) => {
-    onChange?.(e.target.value);
+  const handleSelect = (val) => {
+    onChange?.(val);
+    setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedLabel =
+    options.find((opt) => (opt.value ?? opt.abbreviation ?? opt) === value)
+      ?.label ??
+    options.find((opt) => (opt.value ?? opt.abbreviation ?? opt) === value)
+      ?.name ??
+    value;
+
   return (
-    <div className="dropdown-container">
+    <div className={`dropdown-container ${className}`} ref={dropdownRef}>
       {label && (
         <label htmlFor={id} className="dropdown-label">
           {label}
         </label>
       )}
-      <select
-        className={`dropdown ${className}`}
-        value={value ?? ""}
-        onChange={handleChange}
-        name={name}
-        id={id}
-        disabled={disabled}
-        required={required}
+      <div
+        className={`dropdown-selected ${disabled ? "disabled" : ""}`}
+        onClick={() => {
+          if (!disabled) setIsOpen(!isOpen);
+        }}
       >
-        {!value && <option value="" disabled hidden></option>}
-        {options.map((option, index) => {
-          const optionValue = option.value ?? option.abbreviation ?? option;
-          const label = option.label ?? option.name ?? option;
-          return (
-            <option key={index} value={optionValue}>
-              {label}
-            </option>
-          );
-        })}
-      </select>
+        {selectedLabel || ""}
+      </div>
+      {isOpen && (
+        <ul className="dropdown-list">
+          {options.map((option, index) => {
+            const optionValue = option.value ?? option.abbreviation ?? option;
+            const label = option.label ?? option.name ?? option;
+            return (
+              <li
+                key={index}
+                className="dropdown-option"
+                onClick={() => handleSelect(optionValue)}
+              >
+                {label}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      {required && !value && (
+        <input type="hidden" name={name} value="" required />
+      )}
     </div>
   );
 }
